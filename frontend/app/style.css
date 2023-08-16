@@ -1,0 +1,45 @@
+.card-container{
+    /* display: flex; */
+    /* justify-content: center; */
+    flex-direction: row;
+    margin-top: 20px;
+
+
+}
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.item{
+    
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+  
+
+    
+}
+ul{
+    display: flex;
+    list-style: none;
+    margin: 5px;
+    flex-wrap: wrap;
+    column-gap: 2px;
+    margin-left:90 px ;
+}
+h6{
+    margin: 10px;
+    text-align: center;
+}
+li{
+    margin: 10px;
+    border: 5px solid grey;
+
+
+
+}
+h4{
+    text-align: center;
+
+}
