@@ -123,11 +123,29 @@ const getProduct = async function (req, res) {
     }
 }
 
+//=====================================================================================================================================
+
+const getDetailsFromParam = async function (req, res) {
+
+    try {
+        let productId = req.params.id
+
+        if (!productId) return res.status(400).send({ status: false, message: "No parameter found" })
+
+        const ProductByProductId = await productModel.findOne({ _id: productId })
+        if (!ProductByProductId) return res.status(404).send({ staus: false, message: "No such product exist with this Id" })
+
+        return res.status(200).send(ProductByProductId)
+    }
+    catch (err) {
+        return res.status(500).send({ status: false, message: err.message })
+    }
+}
 
 
 
 
-module.exports={createUser,createProduct,loginUser,getProduct}
+module.exports={createUser,createProduct,loginUser,getProduct,getDetailsFromParam}
 
 
 

@@ -1,21 +1,18 @@
+"use client"
+
+
 import { useState } from 'react';
-import { useRouter } from 'next/router';
-import styles from './styles/loginform.module.css'
-import Products from './products';
+import { useRouter } from 'next/navigation';
+import styles from './loginform.module.css'
+// import Products from '../../pages/products';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
- 
-  // const router =useRouter();
+  const router=useRouter()
 
-// const handleRouteChange=()=>{
-
-
-
-// }
 
 
 
@@ -32,12 +29,11 @@ export default function Login() {
       });
 
       if (response.ok) {
-        
+
         setIsLoggedIn(true);
-        // router.push('/home');
 
         console.log("login succesfil")
-      
+
         // Redirect to the home page (replace '/home' with your desired route)
       } else {
         const data = await response.json();
@@ -48,17 +44,18 @@ export default function Login() {
     }
   };
 
-  
-if(isLoggedIn){
-  return <Products/>
-}
- 
+
+  if (isLoggedIn) {
+    router.push('/products');
+
+  }
+
 
   return (
     <div className={styles.container}>
       <h1>Login Page</h1>
       <form onSubmit={handleLogin}>
-      <div className={styles['form-group']}>
+        <div className={styles['form-group']}>
           <label>Email : </label>
           <input type="email" className="form-group" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
@@ -66,7 +63,7 @@ if(isLoggedIn){
           <label>Password : </label>
           <input type="password" className="form-group" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
-        <button  type="submit" className={styles.button} onClick={handleLogin}>Login</button>
+        <button type="submit" className={styles.loginbutton} onClick={handleLogin}>Login</button>
         {errorMessage && <p className={styles['error-message']}>{errorMessage}</p>}
       </form>
     </div>

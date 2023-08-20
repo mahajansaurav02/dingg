@@ -11,5 +11,6 @@ router.post("/registerUser",apiController.createUser)
 router.post("/registerProduct",apiController.createProduct)
 router.post("/login" , apiController.loginUser)
 router.get("/getProducts", apiController.getProduct)
+router.get("/getProduct/:id", apiController.getDetailsFromParam)
 
 module.exports=router

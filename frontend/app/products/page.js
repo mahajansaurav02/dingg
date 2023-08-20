@@ -1,5 +1,8 @@
+"use client"
+
 import { useState, useEffect } from 'react';
-import Login from './login';
+import router from 'next/router'
+import Link from 'next/link';
 import './style.css'
 
 export default function Products() {
@@ -10,12 +13,9 @@ export default function Products() {
     async function fetchProducts() {
       try {
         const response = await fetch('http://localhost:5000/getProducts');
-        console.log(response)
         if (response.ok) {
           const data = await response.json();
-          console.log(data)
           setProducts(data);
-          console.log(products)
         }
       } catch (error) {
         console.error('Error:', error);
@@ -34,24 +34,25 @@ export default function Products() {
 
   return (
     <div className="card-container">
-     
-      <h1>Products</h1>
+
+      <h1>Featured Products</h1>
       <div className='item'>  <ul >
         {products.data.map((product) => (
-          <li key={product.id}>
-            <img style={{width:200, height:150} } src={product.productImage} alt={product.title} />
-           <h4>{product.title}   </h4>
-            
-            
-            <h6>Rs-{product.price}</h6>
-            
+          <li key={product._id}>
+            <Link href={`/products/${product._id}`}>
+              <img style={{ width: 200, height: 150 }} src={product.productImage} alt={product.title} />
+              <h4>{product.title}   </h4>
+
+              <h6>Rs-{product.price}</h6>
+            </Link>
+
           </li>
         ))}
       </ul></div>
-    
-      
-      
-      
+
+
+
+
     </div>
   );
 }
